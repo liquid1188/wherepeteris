@@ -1,4 +1,7 @@
+import { HtmlBasePlugin } from "@11ty/eleventy";
+
 export default function (cfg) {
+  cfg.addPlugin(HtmlBasePlugin); // rewrites root-relative URLs when PATH_PREFIX is set (preview builds)
   cfg.addPassthroughCopy({ "src/css": "css", "src/static": "/", "src/wp": "wp" });
   cfg.addFilter("date", (d, fmt = "long") => {
     const dt = d instanceof Date ? d : new Date(d);
@@ -14,5 +17,5 @@ export default function (cfg) {
   cfg.addFilter("attr", s => String(s || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"));
   cfg.addGlobalData("year", () => new Date().getUTCFullYear());
   cfg.setQuietMode(true);
-  return { dir: { input: "src", output: "_site", includes: "_includes", data: "_data" }, htmlTemplateEngine: "njk", markdownTemplateEngine: "njk" };
+  return { pathPrefix: process.env.PATH_PREFIX || "/", dir: { input: "src", output: "_site", includes: "_includes", data: "_data" }, htmlTemplateEngine: "njk", markdownTemplateEngine: "njk" };
 }
