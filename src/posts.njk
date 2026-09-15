@@ -7,6 +7,8 @@ eleventyComputed:
   description: "{{ post.summary }}"
   ogImage: "{{ post.image.src if post.image else '' }}"
 ---
+<div class="wrap with-rail post-layout">
+<div class="main-col">
 <article class="post" data-pagefind-body data-pagefind-meta="author:{{ post.authorObj.name }}, date:{{ post.dateObj | date('short') }}">
   <header class="post-head wrap-narrow">
     {%- if post.primaryCat %}<a class="kicker" href="{{ post.primaryCat.url }}">{{ post.primaryCat.name }}</a>{% endif %}
@@ -34,7 +36,7 @@ eleventyComputed:
 
 {%- if post.primaryCat %}{% set more = post.primaryCat.posts | without(post) | head(3) %}
 {%- if more.length %}
-<section class="related wrap" data-pagefind-ignore>
+<section class="related" data-pagefind-ignore>
   <h2 class="section-title">More in {{ post.primaryCat.name }}</h2>
   <div class="stream grid-3">{% for p in more %}{% set size = 'secondary' %}{% include "card.njk" %}{% endfor %}</div>
 </section>
@@ -66,3 +68,6 @@ eleventyComputed:
   </script>
   {%- else %}<p class="meta">Comments are closed on this article.</p>{% endif %}
 </section>
+</div>
+{% include "rail.njk" %}
+</div>

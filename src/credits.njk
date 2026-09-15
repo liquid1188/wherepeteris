@@ -1,0 +1,9 @@
+---
+layout: base.njk
+title: Photo credits
+permalink: /credits/
+---
+<div class="wrap-narrow">
+  <header class="page-head"><h1>Photo credits</h1><p class="lede">Papal portraits used in the site banner.</p></header>
+  <ul class="archive-list">{% for c in popeCredits %}<li><span></span><span><a href="{{ c.source }}">{{ c.file | replace('File:', '') }}</a> by {{ c.artist or 'unknown' }}, {{ c.license }}, via Wikimedia Commons.</span></li>{% endfor %}</ul>
+</div>

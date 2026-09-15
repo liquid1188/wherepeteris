@@ -1,0 +1,10 @@
+<section class="popes" aria-label="The popes since John XXIII">
+  <div class="wrap popes-inner">
+    <p class="popes-lede">Where Peter is, there is the Church. Seven successors of Peter since the Council.</p>
+    <ul class="popes-row">
+    {%- for pope in wpi.popes %}
+      <li><a href="{{ pope.url }}"><img src="/popes/{{ pope.slug }}.jpg" alt="Pope {{ pope.name }}" width="400" height="500" loading="lazy"><span class="popes-name">{{ pope.name }}</span><span class="popes-years">{{ pope.years }}</span></a></li>
+    {%- endfor %}
+    </ul>
+  </div>
+</section>

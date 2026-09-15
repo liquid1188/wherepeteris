@@ -1,6 +1,9 @@
 // Turns the raw WordPress export in ./wp/ into everything the templates need.
 import { readFileSync } from "node:fs";
 import site from "./site.json" with { type: "json" };
+import collectionDefs from "./readingLists.json" with { type: "json" };
+import popes from "./popes.json" with { type: "json" };
+import popular from "./popular.json" with { type: "json" };
 
 const read = f => JSON.parse(readFileSync(new URL(`./wp/${f}.json`, import.meta.url), "utf8"));
 const rawPosts = read("posts"), rawPages = read("pages"), categories = read("categories"),
@@ -60,6 +63,8 @@ function decorate(p) {
   p.dateObj = new Date(p.date);
   p.comments = commentsByPost[p.id] || [];
   p.commentCount = countThread(p.comments);
+  p.searchText = (p.title + " " + p.tagObjs.map(t => t.name).join(" ") + " " + p.cats.map(c => c.name).join(" ")).toLowerCase();
+  p.bodyText = strip(p.content).toLowerCase();
   return p;
 }
 
@@ -90,11 +95,38 @@ for (const t of tags) { t.posts = posts.filter(p => p.tags.includes(t.id)); if (
 const topCategories = categories.filter(c => c.posts.length >= 3 && c.slug !== "uncategorized").sort((a, b) => b.posts.length - a.posts.length);
 const contributors = authors.filter(a => a.count > 0).sort((a, b) => b.count - a.count);
 
+// Curated collections. An article is in a collection when a match phrase appears in its
+// title, tags, or categories (strong), or at least three times in the body (weak).
+function score(p, def) {
+  let sc = 0;
+  if (def.cat && p.cats.some(c => c.slug === def.cat)) sc += 10;
+  for (const m of def.match || []) {
+    if (p.searchText.includes(m)) sc += 5;
+    else { let n = 0, i = -1; while ((i = p.bodyText.indexOf(m, i + 1)) !== -1 && n < 6) n++; if (n >= 3) sc += Math.min(n, 6) / 2; }
+  }
+  return sc;
+}
+const collections = collectionDefs.map(def => {
+  const items = posts.map(p => ({ p, sc: score(p, def) })).filter(x => x.sc >= 3).sort((a, b) => b.sc - a.sc || b.p.date.localeCompare(a.p.date)).map(x => x.p);
+  return { ...def, url: `/collections/${def.slug}/`, posts: items, count: items.length, cover: items.find(p => p.image)?.image || null };
+}).filter(c => c.count >= 3);
+const collectionPages = collections.flatMap(c => listing("collection", c, c.posts, c.url));
+for (const pope of popes) {
+  const def = { match: pope.match };
+  pope.url = `/popes/${pope.slug}/`;
+  pope.posts = posts.map(p => ({ p, sc: score(p, def) })).filter(x => x.sc >= 3).sort((a, b) => b.sc - a.sc || b.p.date.localeCompare(a.p.date)).map(x => x.p);
+  pope.count = pope.posts.length;
+}
+const popePages = popes.flatMap(pope => listing("pope", pope, pope.posts, pope.url));
+const postsByUrl = Object.fromEntries(posts.map(p => [p.url, p]));
+const popularPosts = (popular.items || []).map(u => postsByUrl[u]).filter(Boolean);
+const mostCommented = [...posts].sort((a, b) => b.commentCount - a.commentCount).slice(0, 8);
+
 const years = {};
 for (const p of posts) (years[p.dateObj.getUTCFullYear()] ||= []).push(p);
 
 export default {
-  posts, pages, pagesById, categories, tags, authors, contributors, topCategories,
+  posts, pages, pagesById, collections, collectionPages, popes, popePages, popularPosts: popularPosts.length ? popularPosts : mostCommented.slice(0, 6), mostCommented, categories, tags, authors, contributors, topCategories,
   homePages, authorPages, categoryPages, tagPages, years,
   totals: { posts: posts.length, comments: comments.length, authors: contributors.length },
   postsById: byId(posts),

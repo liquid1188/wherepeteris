@@ -1,0 +1,11 @@
+---
+layout: base.njk
+title: Podcasts
+permalink: /podcasts/
+description: The Where Peter Is podcast and audio versions of articles.
+---
+<div class="wrap-narrow">
+  <header class="page-head"><h1>Podcasts</h1><p class="lede">Listen on Castbox, or wherever you get podcasts. Episode write-ups are in the <a href="/category/third-space-podcast/">Third Space Podcast</a> and <a href="/category/pope-francis-generation-podcast/">Pope Francis Generation</a> topics.</p></header>
+  {%- for pod in site.podcasts %}<h2 class="section-title">{{ pod.name }}</h2><iframe src="{{ pod.castbox }}" title="{{ pod.name }}" width="100%" height="330" frameborder="0" scrolling="no" allow="autoplay"></iframe>{% endfor %}
+  <p class="meta">Also on <a href="{{ site.social.soundcloud }}">SoundCloud</a> and <a href="{{ site.social.youtube }}">YouTube</a>.</p>
+</div>

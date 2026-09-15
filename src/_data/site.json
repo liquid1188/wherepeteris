@@ -8,25 +8,134 @@
   "perPage": 20,
   "ga": "",
   "social": {
-    "twitter": "https://twitter.com/wherepeteris",
-    "facebook": "https://www.facebook.com/wherepeteris",
-    "youtube": "https://www.youtube.com/@wherepeteris"
+    "twitter": "https://twitter.com/Where_Peter_is",
+    "facebook": "https://www.facebook.com/wherepeterisblog/",
+    "youtube": "http://youtube.com/channel/UCjPq33qBG2JymrJPNzXJM7A",
+    "soundcloud": "https://soundcloud.com/where-peter-is"
   },
   "nav": [
-    { "label": "Latest", "href": "/" },
-    { "label": "Topics", "href": "/topics/" },
-    { "label": "Contributors", "href": "/contributors/" },
-    { "label": "Resources", "href": "/resources/" },
-    { "label": "About", "href": "/about/" }
+    {
+      "label": "Latest",
+      "href": "/"
+    },
+    {
+      "label": "Collections",
+      "href": "/collections/"
+    },
+    {
+      "label": "Topics",
+      "href": "/topics/"
+    },
+    {
+      "label": "Popes",
+      "href": "/popes/"
+    },
+    {
+      "label": "Contributors",
+      "href": "/contributors/"
+    },
+    {
+      "label": "Podcasts",
+      "href": "/podcasts/"
+    },
+    {
+      "label": "About",
+      "href": "/about/"
+    }
   ],
   "footerNav": [
-    { "label": "Masthead", "href": "/about/masthead/" },
-    { "label": "Article submissions", "href": "/article-submissions/" },
-    { "label": "Contact", "href": "/whats-on-your-mind/" },
-    { "label": "Newsletter", "href": "/wpi-inbox/" },
-    { "label": "Pope Francis remembered", "href": "/category/reflection/in-memoriam-pope-francis/" },
-    { "label": "Which Pope said this?", "href": "/category/which-pope-said-this/" },
-    { "label": "Death penalty", "href": "/death-penalty/" },
-    { "label": "Fratelli Tutti study guide", "href": "/fratellituttiguide/" }
-  ]
+    {
+      "label": "Resources",
+      "href": "/resources/"
+    },
+    {
+      "label": "Masthead",
+      "href": "/about/masthead/"
+    },
+    {
+      "label": "Article submissions",
+      "href": "/article-submissions/"
+    },
+    {
+      "label": "Contact",
+      "href": "/whats-on-your-mind/"
+    },
+    {
+      "label": "Newsletter",
+      "href": "/wpi-inbox/"
+    },
+    {
+      "label": "Pope Francis remembered",
+      "href": "/category/reflection/in-memoriam-pope-francis/"
+    },
+    {
+      "label": "Which Pope said this?",
+      "href": "/category/which-pope-said-this/"
+    },
+    {
+      "label": "Death penalty",
+      "href": "/death-penalty/"
+    },
+    {
+      "label": "Fratelli Tutti study guide",
+      "href": "/fratellituttiguide/"
+    },
+    {
+      "label": "Printable rosary guides",
+      "href": "/printable-rosary-guides-full-page-and-wallet-sized/"
+    },
+    {
+      "label": "Photo credits",
+      "href": "/credits/"
+    }
+  ],
+  "nonprofit": "Where Peter Is is a registered 501(c)(3) nonprofit. Donations are tax-deductible in the United States.",
+  "donate": "https://wherepeteris.com/donate/",
+  "patreon": "https://www.patreon.com/where_peter_is",
+  "merch": "https://www.zazzle.com/pd/spp/pt-zazzle_shirt?dz=82cf5e08-2e1d-4b7f-9b5b-88c158f85864&clone=true&pending=true&style=hanes_mens_crew_tshirt_5250&color=white&size=a_l&design.areas=%5Bzazzle_shirt_10x12_front%5D&social=true&view=113745894146800642",
+  "podcasts": [
+    {
+      "name": "Where Peter Is podcast",
+      "castbox": "https://castbox.fm/app/castbox/player/id2738937?v=8.22.11&autoplay=0"
+    },
+    {
+      "name": "Listen to your favorite posts",
+      "castbox": "https://castbox.fm/app/castbox/player/id4585709?v=8.22.11&autoplay=0"
+    }
+  ],
+  "masthead": [
+    [
+      "Founders",
+      "Mike Lewis, Pedro Gabriel, Paul Fahey, Brian Killian"
+    ],
+    [
+      "Managing Editor",
+      "Mike Lewis"
+    ],
+    [
+      "Production Editor",
+      "Ariane Sroubek"
+    ],
+    [
+      "Senior Editor",
+      "Paul Chu"
+    ],
+    [
+      "Associate Editor",
+      "VJ Tarantino"
+    ],
+    [
+      "Digital Editor",
+      "Andrew Likoudis"
+    ],
+    [
+      "Contributing Editor",
+      "Nathan Turowsky"
+    ],
+    [
+      "Technical Support",
+      "Brian Killian"
+    ]
+  ],
+  "partners": []
 }

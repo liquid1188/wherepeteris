@@ -29,18 +29,19 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="masthead">
+  <div class="topbar"><div class="wrap topbar-inner"><span>{{ site.nonprofit }}</span><span class="topbar-links"><a href="{{ site.patreon }}">Patreon</a><a href="{{ site.merch }}">Merch</a><a href="/wpi-inbox/">Newsletter</a><a href="/whats-on-your-mind/">Contact</a></span></div></div>
   <div class="wrap masthead-inner">
     <a class="wordmark" href="/" aria-label="{{ site.name }} home">
       <svg class="key" viewBox="0 0 64 24" aria-hidden="true"><circle cx="11" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M18.5 12H62M52 12v6M57 12v4M46 12v5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
       <span class="wordmark-text">Where Peter Is</span>
       <span class="wordmark-tag">there is the Church</span>
     </a>
+    <a class="donate-hero" href="{{ site.donate }}"><b>Donate</b><span>501(c)(3), tax-deductible</span></a>
     <nav class="nav" aria-label="Main">
       <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menu</button>
       <ul id="menu">
         {%- for n in site.nav %}<li><a href="{{ n.href }}"{% if page.url == n.href or (n.href != '/' and page.url.startsWith(n.href)) %} aria-current="page"{% endif %}>{{ n.label }}</a></li>{% endfor %}
-        <li><a class="donate" href="{{ site.wp }}/donate/">Donate</a></li>
-        <li><form class="search" action="/search/" role="search"><label class="sr" for="q">Search</label><input id="q" name="q" type="search" placeholder="Search the archive"><button type="submit" aria-label="Search"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></form></li>
+        <li><form class="search" action="/search/" role="search"><label class="sr" for="q">Search</label><input id="q" name="q" type="search" placeholder="Search {{ wpi.totals.posts }} articles"><button type="submit" aria-label="Search"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></form></li>
       </ul>
     </nav>
   </div>
@@ -53,13 +54,14 @@
     <div class="foot-about">
       <p class="foot-name">Where Peter Is</p>
       <p>{{ site.description }} {{ wpi.totals.posts }} articles by {{ wpi.totals.authors }} contributors since 2018.</p>
-      <p class="foot-social"><a href="{{ site.social.twitter }}">X</a> <a href="{{ site.social.facebook }}">Facebook</a> <a href="{{ site.social.youtube }}">YouTube</a> <a href="/feed/">RSS</a></p>
+      <p class="foot-social"><a href="{{ site.social.twitter }}">X</a> <a href="{{ site.social.facebook }}">Facebook</a> <a href="{{ site.social.youtube }}">YouTube</a> <a href="{{ site.social.soundcloud }}">SoundCloud</a> <a href="{{ site.patreon }}">Patreon</a> <a href="/feed/">RSS</a></p>
+      <p><a class="btn" href="{{ site.donate }}">Donate</a> <span class="meta">{{ site.nonprofit }}</span></p>
     </div>
     <ul class="foot-nav">
       {%- for n in site.footerNav %}<li><a href="{{ n.href }}">{{ n.label }}</a></li>{% endfor %}
-      <li><a href="{{ site.wp }}/donate/">Donate</a></li>
+      <li><a href="{{ site.merch }}">Merch</a></li><li><a href="{{ site.patreon }}">Patreon</a></li>
     </ul>
-    <p class="foot-legal">&copy; 2018 to {{ year }} Where Peter Is. Content by its authors. <a href="/archive/">Full archive by year</a>.</p>
+    <p class="foot-legal">&copy; 2018 to {{ year }} Where Peter Is. All rights reserved. Ad Majorem Dei Gloriam. Each contributor's views are his or her own. <a href="/archive/">Full archive by year</a>.</p>
   </div>
 </footer>
 <script>

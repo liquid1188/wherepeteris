@@ -1,0 +1,9 @@
+---
+pagination: { data: wpi.popePages, size: 1, alias: l }
+permalink: "{{ l.url }}"
+layout: base.njk
+eleventyComputed:
+  title: "Pope {{ l.item.name }}{% if l.page > 1 %}, page {{ l.page }}{% endif %}"
+  description: "Articles about Pope {{ l.item.name }} ({{ l.item.years }}) at Where Peter Is."
+---
+{% include "listing.njk" %}

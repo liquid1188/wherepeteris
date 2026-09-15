@@ -1,0 +1,36 @@
+{#- Everything that used to live in the WordPress sidebar, plus the nonprofit ask. -#}
+<aside class="rail" aria-label="Support and more">
+  <section class="rail-card rail-donate">
+    <h2>Support Where Peter Is</h2>
+    <p>Everything here is free to read and written by volunteers. {{ site.nonprofit }}</p>
+    <a class="btn btn-block" href="{{ site.donate }}">Donate</a>
+    <a class="btn btn-ghost btn-block" href="{{ site.patreon }}">Join on Patreon</a>
+  </section>
+  <section class="rail-card">
+    <h2>Most read</h2>
+    <ol class="rail-list">{% for p in wpi.popularPosts | head(6) %}<li><a href="{{ p.url }}">{{ p.title }}</a><small>{{ p.authorObj.name }}</small></li>{% endfor %}</ol>
+  </section>
+  <section class="rail-card">
+    <h2>Collections</h2>
+    <ul class="rail-tags">{% for c in wpi.collections | head(10) %}<li><a href="{{ c.url }}">{{ c.title }}</a></li>{% endfor %}<li><a class="more" href="/collections/">All collections</a></li></ul>
+  </section>
+  <section class="rail-card">
+    <h2>Podcasts</h2>
+    {%- for pod in site.podcasts %}<h3>{{ pod.name }}</h3><iframe src="{{ pod.castbox }}" title="{{ pod.name }}" loading="lazy" width="100%" height="180" frameborder="0" scrolling="no" allow="autoplay"></iframe>{% endfor %}
+    <p class="meta"><a href="/podcasts/">All episodes and players</a></p>
+  </section>
+  <section class="rail-card rail-merch">
+    <h2>WPI merch</h2>
+    <p>Shirts and more, with proceeds supporting the site.</p>
+    <a class="btn btn-ghost btn-block" href="{{ site.merch }}">Shop on Zazzle</a>
+  </section>
+  <section class="rail-card">
+    <h2>Newsletter</h2>
+    <p>New articles in your inbox, nothing else.</p>
+    <a class="btn btn-ghost btn-block" href="/wpi-inbox/">Get WPI by email</a>
+  </section>
+  <section class="rail-card">
+    <h2>Follow</h2>
+    <p class="rail-social"><a href="{{ site.social.facebook }}">Facebook</a> <a href="{{ site.social.twitter }}">X</a> <a href="{{ site.social.youtube }}">YouTube</a> <a href="{{ site.social.soundcloud }}">SoundCloud</a> <a href="/feed/">RSS</a></p>
+  </section>
+</aside>

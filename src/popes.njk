@@ -1,0 +1,14 @@
+---
+layout: base.njk
+title: The popes
+permalink: /popes/
+description: The seven popes since John XXIII, with articles on each from the Where Peter Is archive.
+---
+<div class="wrap">
+  <header class="page-head"><h1>The popes since the Council</h1><p class="lede">From John XXIII, who called Vatican II, to Leo XIV.</p></header>
+  <div class="popes-grid">
+  {%- for pope in wpi.popes %}
+    <a class="pope-card" href="{{ pope.url }}"><img src="/popes/{{ pope.slug }}.jpg" alt="Pope {{ pope.name }}" width="400" height="500" loading="lazy"><span><b>{{ pope.name }}</b><em>{{ pope.years }}</em>{{ pope.line }}<small>{{ pope.count }} articles</small></span></a>
+  {%- endfor %}
+  </div>
+</div>

@@ -1,0 +1,51 @@
+[
+ {
+  "slug": "john-xxiii",
+  "file": "File:Pope John XXIII, 1958\u20131963 (3x4 cropped).jpg",
+  "license": "Public domain",
+  "artist": "Fotografia Felici",
+  "source": "https://commons.wikimedia.org/wiki/File:Pope_John_XXIII,_1958%E2%80%931963_(3x4_cropped).jpg"
+ },
+ {
+  "slug": "paul-vi",
+  "file": "File:Pope Paul VI 1969 Portrait (4x5 cropped).jpg",
+  "license": "Public domain",
+  "artist": "Fotografia Felici",
+  "source": "https://commons.wikimedia.org/wiki/File:Pope_Paul_VI_1969_Portrait_(4x5_cropped).jpg"
+ },
+ {
+  "slug": "john-paul-i",
+  "file": "File:Paus Johannes Paulus I (Bestanddeelnr 929-9074) (cropped).jpg",
+  "license": "CC0",
+  "artist": "Anefo",
+  "source": "https://commons.wikimedia.org/wiki/File:Paus_Johannes_Paulus_I_(Bestanddeelnr_929-9074)_(cropped).jpg"
+ },
+ {
+  "slug": "john-paul-ii",
+  "file": "File:Pope John Paul II 1984 portrait.jpg",
+  "license": "Attribution",
+  "artist": "Unknown authorUnknown author",
+  "source": "https://commons.wikimedia.org/wiki/File:Pope_John_Paul_II_1984_portrait.jpg"
+ },
+ {
+  "slug": "benedict-xvi",
+  "file": "File:Portrait of Pope Benedict XVI (2011).jpg",
+  "license": "CC BY-SA 3.0",
+  "artist": "Medialpj",
+  "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_Pope_Benedict_XVI_(2011).jpg"
+ },
+ {
+  "slug": "francis",
+  "file": "File:Portrait of Pope Francis (2021) cropped.jpg",
+  "license": "Attribution",
+  "artist": "Presidenza della Repubblica",
+  "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_Pope_Francis_(2021)_cropped.jpg"
+ },
+ {
+  "slug": "leo-xiv",
+  "file": "File:Portrait of Pope Leo XIV 1 (20150512).png",
+  "license": "CC BY-SA 4.0",
+  "artist": "\u2060Edgar Beltr\u00e1n, The Pillar",
+  "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_Pope_Leo_XIV_1_(20150512).png"
+ }
+]

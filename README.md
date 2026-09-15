@@ -39,3 +39,10 @@ Comments post straight to WordPress's own `wp-comments-post.php`, so Akismet, mo
 - The REST API does not expose Molongui guest authors, so articles by guest authors show the WordPress account that posted them. Fix on the WordPress side by giving guest authors real user accounts, or by exposing the Molongui field to the REST API.
 - GiveWP donation pages and the donor dashboard stay on WordPress; `/donate/` redirects there.
 - SearchWP, WP Rocket, Sucuri, SocialSnap, and MailOptin are no longer needed for the public site once it is static.
+
+## Curated sections
+
+- `src/_data/readingLists.json`: the collections. Each has a slug, title, blurb, and match phrases; an article joins a collection when a phrase appears in its title, tags, or categories, or at least three times in the body. Edit the phrases to tune a collection, add an entry to create a new one.
+- `src/_data/popes.json`: the seven popes in the banner, with match phrases for their article pages. Portraits are in `src/static/popes/` (public domain or CC, credited at `/credits/`).
+- `src/_data/popular.json`: the "Most read" list. Paste the URLs from the SocialSnap popular-posts widget in WordPress; leave empty to fall back to most-commented.
+- `src/_data/site.json`: masthead roster, partners and sponsors (`partners`, empty until you add some), podcast players, merch, Patreon, and social links. Set `nonprofit` to the exact wording you want for the 501(c)(3) line.

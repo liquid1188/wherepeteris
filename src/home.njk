@@ -5,23 +5,31 @@ layout: base.njk
 eleventyComputed:
   title: "{% if l.page > 1 %}Latest, page {{ l.page }}{% else %}Where Peter Is{% endif %}"
 ---
-<div class="wrap">
+{%- if l.page == 1 %}{% include "popes-banner.njk" %}{% endif %}
+<div class="wrap with-rail">
+<div class="main-col">
 {%- if l.page == 1 %}
   {%- set lead = l.posts[0] %}
   <section class="lead-block">
     {% set p = lead %}{% set size = 'lead' %}{% include "card.njk" %}
     <div class="lead-side">
-      {%- for p in l.posts | skip(1) | head(3) %}{% set size = 'row' %}{% include "card.njk" %}{% endfor %}
+      {%- for p in l.posts | skip(1) | head(4) %}{% set size = 'row' %}{% include "card.njk" %}{% endfor %}
     </div>
   </section>
-  <section class="topic-strip" aria-label="Topics">
-    {%- for c in wpi.topCategories | head(8) %}<a href="{{ c.url }}">{{ c.name }}</a>{% endfor %}
-    <a href="/topics/">All topics</a>
+
+  <section class="home-coll" aria-labelledby="coll-h">
+    <div class="section-row"><h2 class="section-title" id="coll-h">Collections</h2><a href="/collections/">All {{ wpi.collections.length }} collections</a></div>
+    <div class="coll-strip">
+    {%- for c in wpi.collections | head(6) %}<a class="coll coll-sm" href="{{ c.url }}">{% if c.cover %}<img src="{{ c.cover | img('medium') }}" alt="" loading="lazy">{% endif %}<span class="coll-body"><b>{{ c.title }}</b><small>{{ c.count }} articles</small></span></a>{% endfor %}
+    </div>
   </section>
-  <h2 class="section-title">More from the last few weeks</h2>
-  <div class="stream grid-2">
-  {%- for p in l.posts | skip(4) %}{% set size = 'secondary' if p.image else 'row' %}{% include "card.njk" %}{% endfor %}
-  </div>
+
+  <section aria-labelledby="more-h">
+    <div class="section-row"><h2 class="section-title" id="more-h">Recent articles</h2><a href="/archive/">Full archive</a></div>
+    <div class="stream grid-2">
+    {%- for p in l.posts | skip(5) %}{% set size = 'secondary' if p.image else 'row' %}{% include "card.njk" %}{% endfor %}
+    </div>
+  </section>
 {%- else %}
   <header class="page-head"><h1>Latest, page {{ l.page }}</h1></header>
   <div class="stream">
@@ -30,3 +38,25 @@ eleventyComputed:
 {%- endif %}
   {% include "pager.njk" %}
 </div>
+{% include "rail.njk" %}
+</div>
+
+{%- if l.page == 1 %}
+<section class="people-band">
+  <div class="wrap">
+    <div class="section-row"><h2 class="section-title">Who makes this site</h2><a href="/contributors/">All {{ wpi.totals.authors }} contributors</a></div>
+    <div class="people-band-grid">
+      <div>
+        <h3>Editorial team</h3>
+        <dl class="masthead-list">{% for row in site.masthead %}<div><dt>{{ row[0] }}</dt><dd>{{ row[1] }}</dd></div>{% endfor %}</dl>
+        <p class="meta"><a href="/about/masthead/">Masthead</a> and <a href="/about/">about the site</a></p>
+      </div>
+      <div>
+        <h3>Most frequent contributors</h3>
+        <ul class="people people-compact">{% for a in wpi.contributors | head(12) %}<li><a href="{{ a.url }}">{% if a.avatar %}<img src="{{ a.avatar }}" alt="" width="44" height="44" loading="lazy">{% endif %}<span><b>{{ a.name }}</b><br><small>{{ a.count }} articles</small></span></a></li>{% endfor %}</ul>
+      </div>
+      {%- if site.partners.length %}<div><h3>Partners and sponsors</h3><ul class="partners">{% for s in site.partners %}<li><a href="{{ s.url }}">{% if s.logo %}<img src="{{ s.logo }}" alt="{{ s.name }}">{% else %}{{ s.name }}{% endif %}</a></li>{% endfor %}</ul></div>{% endif %}
+    </div>
+  </div>
+</section>
+{%- endif %}

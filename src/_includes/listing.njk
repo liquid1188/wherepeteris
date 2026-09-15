@@ -1,5 +1,6 @@
 {#- Shared body for author, category, and tag pages. `l` is a listing object. -#}
-<div class="wrap">
+<div class="wrap with-rail">
+<div class="main-col">
   <header class="page-head">
     {%- if l.kind == 'author' %}
       <div class="author-head">
@@ -12,6 +13,10 @@
       <p class="crumb"><a href="/topics/">Topics</a></p><h1>{{ l.item.name }}</h1>
       {%- if l.item.description %}<p class="lede">{{ l.item.description | striptags }}</p>{% endif %}
       <p class="meta">{{ l.total }} article{% if l.total != 1 %}s{% endif %}</p>
+    {%- elif l.kind == 'collection' %}
+      <p class="crumb"><a href="/collections/">Collections</a></p><h1>{{ l.item.title }}</h1><p class="lede">{{ l.item.blurb }}</p><p class="meta">{{ l.total }} articles, most relevant first</p>
+    {%- elif l.kind == 'pope' %}
+      <div class="author-head"><img class="pope-thumb" src="/popes/{{ l.item.slug }}.jpg" alt="" width="96" height="120"><div><p class="crumb"><a href="/popes/">The popes</a></p><h1>Pope {{ l.item.name }}</h1><p class="lede">{{ l.item.years }}. {{ l.item.line }}.</p><p class="meta">{{ l.total }} articles</p></div></div>
     {%- else %}
       <p class="crumb">Tagged</p><h1>{{ l.item.name }}</h1><p class="meta">{{ l.total }} article{% if l.total != 1 %}s{% endif %}</p>
     {%- endif %}
@@ -20,4 +25,6 @@
   {%- for p in l.posts %}{% set size = 'secondary' if (loop.first and l.page == 1 and p.image) else 'row' %}{% include "card.njk" %}{% endfor %}
   </div>
   {% include "pager.njk" %}
+</div>
+{% include "rail.njk" %}
 </div>

@@ -1,0 +1,14 @@
+---
+layout: base.njk
+title: Collections
+permalink: /collections/
+description: Curated reading lists from the Where Peter Is archive on the debates that have shaped the Church since Vatican II.
+---
+<div class="wrap">
+  <header class="page-head"><h1>Collections</h1><p class="lede">Reading lists on the arguments of the last sixty years, drawn from the full archive. Each is ordered by relevance, then date.</p></header>
+  <div class="coll-grid">
+  {%- for c in wpi.collections %}
+    <a class="coll" href="{{ c.url }}">{% if c.cover %}<img src="{{ c.cover | img('medium_large') }}" alt="" loading="lazy">{% endif %}<span class="coll-body"><b>{{ c.title }}</b><span>{{ c.blurb }}</span><small>{{ c.count }} articles</small></span></a>
+  {%- endfor %}
+  </div>
+</div>
