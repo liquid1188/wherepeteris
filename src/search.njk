@@ -1,0 +1,12 @@
+---
+layout: base.njk
+title: Search
+permalink: /search/
+---
+<div class="wrap-narrow">
+  <header class="page-head"><h1>Search</h1></header>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <div id="search"></div>
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script>window.addEventListener('DOMContentLoaded',function(){var q=new URLSearchParams(location.search).get('q')||'';new PagefindUI({element:'#search',showSubResults:false,showImages:false,excerptLength:30});if(q){var i=document.querySelector('#search input');i.value=q;i.dispatchEvent(new Event('input',{bubbles:true}));}});</script>
+</div>

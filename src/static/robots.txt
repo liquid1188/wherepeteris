@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wherepeteris.com/sitemap.xml

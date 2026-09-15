@@ -1,0 +1,32 @@
+{
+  "name": "Where Peter Is",
+  "tagline": "there is the Church",
+  "url": "https://wherepeteris.com",
+  "wp": "https://wherepeteris.com",
+  "media": "https://wherepeteris.com",
+  "description": "Where Peter Is is a Catholic site of commentary, analysis, and reflection in support of the pope and the Magisterium, founded in 2018.",
+  "perPage": 20,
+  "ga": "",
+  "social": {
+    "twitter": "https://twitter.com/wherepeteris",
+    "facebook": "https://www.facebook.com/wherepeteris",
+    "youtube": "https://www.youtube.com/@wherepeteris"
+  },
+  "nav": [
+    { "label": "Latest", "href": "/" },
+    { "label": "Topics", "href": "/topics/" },
+    { "label": "Contributors", "href": "/contributors/" },
+    { "label": "Resources", "href": "/resources/" },
+    { "label": "About", "href": "/about/" }
+  ],
+  "footerNav": [
+    { "label": "Masthead", "href": "/about/masthead/" },
+    { "label": "Article submissions", "href": "/article-submissions/" },
+    { "label": "Contact", "href": "/whats-on-your-mind/" },
+    { "label": "Newsletter", "href": "/wpi-inbox/" },
+    { "label": "Pope Francis remembered", "href": "/category/reflection/in-memoriam-pope-francis/" },
+    { "label": "Which Pope said this?", "href": "/category/which-pope-said-this/" },
+    { "label": "Death penalty", "href": "/death-penalty/" },
+    { "label": "Fratelli Tutti study guide", "href": "/fratellituttiguide/" }
+  ]
+}

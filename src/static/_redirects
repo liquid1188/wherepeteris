@@ -1,0 +1,10 @@
+# Old WordPress URL shapes that the static site handles differently
+/feed            /feed/index.xml   200
+/feed/           /feed/index.xml   200
+/?s=:q           /search/?q=:q     302
+/donate          https://wherepeteris.com/donate/  302
+/donate/         https://wherepeteris.com/donate/  302
+/donor-dashboard/*  https://wherepeteris.com/donor-dashboard/  302
+/wp-admin/*      https://wherepeteris.com/wp-admin/:splat  302
+/wp-login.php    https://wherepeteris.com/wp-login.php  302
+/*/feed/         /feed/index.xml   302

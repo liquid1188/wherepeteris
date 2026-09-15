@@ -1,0 +1,9 @@
+<li class="comment" id="comment-{{ c.id }}">
+  <div class="comment-head">{% if c.avatar %}<img class="avatar" src="{{ c.avatar }}" alt="" width="40" height="40" loading="lazy">{% endif %}
+    <b>{% if c.url %}<a href="{{ c.url }}" rel="nofollow ugc">{{ c.author }}</a>{% else %}{{ c.author }}{% endif %}</b>
+    <a class="comment-date" href="#comment-{{ c.id }}"><time datetime="{{ c.date }}">{{ c.date | date('short') }}</time></a>
+  </div>
+  <div class="comment-body">{{ c.content | safe }}</div>
+  {%- if post.comment_status == 'open' %}<button class="reply" type="button" data-reply="{{ c.id }}" data-name="{{ c.author | attr }}">Reply</button>{% endif %}
+  {%- if c.replies.length %}<ul class="comments">{% for c in c.replies %}{% include "comment.njk" %}{% endfor %}</ul>{% endif %}
+</li>

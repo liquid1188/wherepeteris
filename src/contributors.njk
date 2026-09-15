@@ -1,0 +1,12 @@
+---
+layout: base.njk
+title: Contributors
+permalink: /contributors/
+description: The writers of Where Peter Is.
+---
+<div class="wrap">
+  <header class="page-head"><h1>Contributors</h1><p class="lede">{{ wpi.totals.authors }} writers have published at Where Peter Is since 2018. See the <a href="/about/masthead/">masthead</a> for the editorial team.</p></header>
+  <ul class="people">
+  {%- for a in wpi.contributors %}<li><a href="{{ a.url }}">{% if a.avatar %}<img src="{{ a.avatar }}" alt="" width="56" height="56" loading="lazy">{% endif %}<span><b>{{ a.name }}</b><br><small>{{ a.count }} article{% if a.count != 1 %}s{% endif %}</small></span></a></li>{% endfor %}
+  </ul>
+</div>

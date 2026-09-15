@@ -1,0 +1,14 @@
+---
+layout: base.njk
+title: Archive
+permalink: /archive/
+description: Every article published at Where Peter Is, by year.
+---
+<div class="wrap-narrow">
+  <header class="page-head"><h1>Archive</h1><p class="lede">{{ wpi.totals.posts }} articles since 2018.</p></header>
+  {%- for y, list in wpi.years | dictsort | reverse %}
+  <details class="year"{% if loop.first %} open{% endif %}><summary><h2>{{ y }} <small>{{ list.length }}</small></h2></summary>
+    <ul class="archive-list">{% for p in list %}<li><time datetime="{{ p.date }}">{{ p.dateObj | date('short') }}</time> <a href="{{ p.url }}">{{ p.title }}</a> <small>{{ p.authorObj.name }}</small></li>{% endfor %}</ul>
+  </details>
+  {%- endfor %}
+</div>

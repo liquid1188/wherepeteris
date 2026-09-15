@@ -1,0 +1,12 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>{{ site.url }}/</loc></url>
+{%- for p in wpi.posts %}<url><loc>{{ site.url }}{{ p.url }}</loc><lastmod>{{ p.modified | date('iso') }}</lastmod></url>{% endfor %}
+{%- for p in wpi.pages %}<url><loc>{{ site.url }}{{ p.url }}</loc></url>{% endfor %}
+{%- for c in wpi.topCategories %}<url><loc>{{ site.url }}{{ c.url }}</loc></url>{% endfor %}
+{%- for a in wpi.contributors %}<url><loc>{{ site.url }}{{ a.url }}</loc></url>{% endfor %}
+</urlset>

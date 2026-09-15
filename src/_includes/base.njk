@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if title and title != site.name %}{{ title }} | {{ site.name }}{% else %}{{ site.name }}, {{ site.tagline }}{% endif %}</title>
+<meta name="description" content="{{ (description or site.description) | attr }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ (title or site.name) | attr }}">
+<meta property="og:description" content="{{ (description or site.description) | attr }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:type" content="{% if post %}article{% else %}website{% endif %}">
+{%- if ogImage %}<meta property="og:image" content="{{ ogImage }}"><meta name="twitter:card" content="summary_large_image">{% else %}<meta name="twitter:card" content="summary">{% endif %}
+<meta name="twitter:site" content="@wherepeteris">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="/feed/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/css/site.css">
+{%- if site.ga %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga }}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{ site.ga }}');</script>
+{%- endif %}
+{%- if post %}
+<script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"Article","headline":post.title,"datePublished":post.date,"dateModified":post.modified,"author":{"@type":"Person","name":post.authorObj.name},"publisher":{"@type":"Organization","name":site.name},"mainEntityOfPage":site.url + post.url,"image":ogImage} | dump | safe }}</script>
+{%- endif %}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="wordmark" href="/" aria-label="{{ site.name }} home">
+      <svg class="key" viewBox="0 0 64 24" aria-hidden="true"><circle cx="11" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M18.5 12H62M52 12v6M57 12v4M46 12v5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span class="wordmark-text">Where Peter Is</span>
+      <span class="wordmark-tag">there is the Church</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul id="menu">
+        {%- for n in site.nav %}<li><a href="{{ n.href }}"{% if page.url == n.href or (n.href != '/' and page.url.startsWith(n.href)) %} aria-current="page"{% endif %}>{{ n.label }}</a></li>{% endfor %}
+        <li><a class="donate" href="{{ site.wp }}/donate/">Donate</a></li>
+        <li><form class="search" action="/search/" role="search"><label class="sr" for="q">Search</label><input id="q" name="q" type="search" placeholder="Search the archive"><button type="submit" aria-label="Search"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></form></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+{{ content | safe }}
+</main>
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <div class="foot-about">
+      <p class="foot-name">Where Peter Is</p>
+      <p>{{ site.description }} {{ wpi.totals.posts }} articles by {{ wpi.totals.authors }} contributors since 2018.</p>
+      <p class="foot-social"><a href="{{ site.social.twitter }}">X</a> <a href="{{ site.social.facebook }}">Facebook</a> <a href="{{ site.social.youtube }}">YouTube</a> <a href="/feed/">RSS</a></p>
+    </div>
+    <ul class="foot-nav">
+      {%- for n in site.footerNav %}<li><a href="{{ n.href }}">{{ n.label }}</a></li>{% endfor %}
+      <li><a href="{{ site.wp }}/donate/">Donate</a></li>
+    </ul>
+    <p class="foot-legal">&copy; 2018 to {{ year }} Where Peter Is. Content by its authors. <a href="/archive/">Full archive by year</a>.</p>
+  </div>
+</footer>
+<script>
+(function(){var b=document.querySelector('.nav-toggle'),m=document.getElementById('menu');b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',!o);m.classList.toggle('open',!o);});})();
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+---
+pagination: { data: wpi.posts, size: 1, alias: post }
+permalink: "{{ post.url }}"
+layout: base.njk
+eleventyComputed:
+  title: "{{ post.title }}"
+  description: "{{ post.summary }}"
+  ogImage: "{{ post.image.src if post.image else '' }}"
+---
+<article class="post" data-pagefind-body data-pagefind-meta="author:{{ post.authorObj.name }}, date:{{ post.dateObj | date('short') }}">
+  <header class="post-head wrap-narrow">
+    {%- if post.primaryCat %}<a class="kicker" href="{{ post.primaryCat.url }}">{{ post.primaryCat.name }}</a>{% endif %}
+    <h1>{{ post.title }}</h1>
+    <div class="post-meta">
+      {%- if post.authorObj.avatar %}<img class="avatar" src="{{ post.authorObj.avatar }}" alt="" width="40" height="40">{% endif %}
+      <span>By <a href="{{ post.authorObj.url }}">{{ post.authorObj.name }}</a></span>
+      <time datetime="{{ post.date }}">{{ post.dateObj | date }}</time>
+      <span>{{ post.readMinutes }} min read</span>
+    </div>
+  </header>
+  {%- if post.image %}<figure class="post-hero wrap-narrow"><img src="{{ post.image.src }}" alt="{{ post.image.alt | attr }}" width="{{ post.image.width }}" height="{{ post.image.height }}" fetchpriority="high"></figure>{% endif %}
+  <div class="prose wrap-narrow">{{ post.content | safe }}</div>
+  <footer class="post-foot wrap-narrow" data-pagefind-ignore>
+    {%- if post.tagObjs.length %}<p class="tags">{% for t in post.tagObjs %}<a href="{{ t.url }}">{{ t.name }}</a>{% endfor %}</p>{% endif %}
+    <div class="author-box">
+      {%- if post.authorObj.avatar %}<img class="avatar-lg" src="{{ post.authorObj.avatar }}" alt="" width="72" height="72" loading="lazy">{% endif %}
+      <div><p class="author-name"><a href="{{ post.authorObj.url }}">{{ post.authorObj.name }}</a></p>
+      {%- if post.authorObj.description %}<p>{{ post.authorObj.description }}</p>{% endif %}
+      <p class="meta"><a href="{{ post.authorObj.url }}">All articles by {{ post.authorObj.name }}</a></p></div>
+    </div>
+    <p class="share">Share <a href="https://twitter.com/intent/tweet?url={{ site.url }}{{ post.url }}&text={{ post.title | urlencode }}">on X</a>, <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url }}">on Facebook</a>, or <a href="mailto:?subject={{ post.title | urlencode }}&body={{ site.url }}{{ post.url }}">by email</a>.</p>
+  </footer>
+</article>
+
+{%- if post.primaryCat %}{% set more = post.primaryCat.posts | without(post) | head(3) %}
+{%- if more.length %}
+<section class="related wrap" data-pagefind-ignore>
+  <h2 class="section-title">More in {{ post.primaryCat.name }}</h2>
+  <div class="stream grid-3">{% for p in more %}{% set size = 'secondary' %}{% include "card.njk" %}{% endfor %}</div>
+</section>
+{%- endif %}{% endif %}
+
+<section class="comments-section wrap-narrow" id="comments" data-pagefind-ignore>
+  <h2 class="section-title">{% if post.commentCount %}{{ post.commentCount }} comment{% if post.commentCount != 1 %}s{% endif %}{% else %}Comments{% endif %}</h2>
+  {%- if post.comments.length %}<ul class="comments">{% for c in post.comments %}{% include "comment.njk" %}{% endfor %}</ul>{% endif %}
+  {%- if post.comment_status == 'open' %}
+  <form class="comment-form" id="respond" method="post" action="{{ site.wp }}/wp-comments-post.php">
+    <h3 id="reply-title">Leave a comment</h3>
+    <p class="replying" hidden>Replying to <b></b>. <button type="button" class="cancel-reply">Cancel</button></p>
+    <p class="meta">Comments are moderated before they appear. Please keep to the topic and be charitable.</p>
+    <div class="field-row"><label>Name<input name="author" required autocomplete="name"></label><label>Email (not published)<input name="email" type="email" required autocomplete="email"></label></div>
+    <label>Comment<textarea name="comment" rows="6" required></textarea></label>
+    <input type="hidden" name="comment_post_ID" value="{{ post.id }}">
+    <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+    <input type="hidden" name="redirect_to" value="{{ site.url }}{{ post.url }}?commented=1#comments">
+    <button class="btn" type="submit">Post comment</button>
+  </form>
+  <p class="notice" id="commented" hidden>Thank you. Your comment is awaiting moderation and will appear once approved.</p>
+  <script>
+  (function(){
+    var parent=document.getElementById('comment_parent'),note=document.querySelector('.replying'),form=document.getElementById('respond');
+    document.querySelectorAll('.reply').forEach(function(b){b.addEventListener('click',function(){parent.value=b.dataset.reply;note.querySelector('b').textContent=b.dataset.name;note.hidden=false;form.scrollIntoView({behavior:'smooth'});form.querySelector('textarea').focus();});});
+    document.querySelector('.cancel-reply').addEventListener('click',function(){parent.value=0;note.hidden=true;});
+    if(location.search.indexOf('commented=1')>-1){document.getElementById('commented').hidden=false;}
+  })();
+  </script>
+  {%- else %}<p class="meta">Comments are closed on this article.</p>{% endif %}
+</section>

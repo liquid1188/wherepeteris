@@ -1,0 +1,23 @@
+{#- Shared body for author, category, and tag pages. `l` is a listing object. -#}
+<div class="wrap">
+  <header class="page-head">
+    {%- if l.kind == 'author' %}
+      <div class="author-head">
+        {%- if l.item.avatar %}<img class="avatar-lg" src="{{ l.item.avatar }}" alt="" width="96" height="96">{% endif %}
+        <div><h1>{{ l.item.name }}</h1>
+        {%- if l.item.description %}<p class="lede">{{ l.item.description }}</p>{% endif %}
+        <p class="meta">{{ l.total }} article{% if l.total != 1 %}s{% endif %}{% if l.item.url and l.item.url.startsWith('http') %}. <a href="{{ l.item.url }}">Website</a>{% endif %}</p></div>
+      </div>
+    {%- elif l.kind == 'category' %}
+      <p class="crumb"><a href="/topics/">Topics</a></p><h1>{{ l.item.name }}</h1>
+      {%- if l.item.description %}<p class="lede">{{ l.item.description | striptags }}</p>{% endif %}
+      <p class="meta">{{ l.total }} article{% if l.total != 1 %}s{% endif %}</p>
+    {%- else %}
+      <p class="crumb">Tagged</p><h1>{{ l.item.name }}</h1><p class="meta">{{ l.total }} article{% if l.total != 1 %}s{% endif %}</p>
+    {%- endif %}
+  </header>
+  <div class="stream">
+  {%- for p in l.posts %}{% set size = 'secondary' if (loop.first and l.page == 1 and p.image) else 'row' %}{% include "card.njk" %}{% endfor %}
+  </div>
+  {% include "pager.njk" %}
+</div>

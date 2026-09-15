@@ -1,0 +1,32 @@
+---
+pagination: { data: wpi.homePages, size: 1, alias: l }
+permalink: "{{ l.url }}"
+layout: base.njk
+eleventyComputed:
+  title: "{% if l.page > 1 %}Latest, page {{ l.page }}{% else %}Where Peter Is{% endif %}"
+---
+<div class="wrap">
+{%- if l.page == 1 %}
+  {%- set lead = l.posts[0] %}
+  <section class="lead-block">
+    {% set p = lead %}{% set size = 'lead' %}{% include "card.njk" %}
+    <div class="lead-side">
+      {%- for p in l.posts | skip(1) | head(3) %}{% set size = 'row' %}{% include "card.njk" %}{% endfor %}
+    </div>
+  </section>
+  <section class="topic-strip" aria-label="Topics">
+    {%- for c in wpi.topCategories | head(8) %}<a href="{{ c.url }}">{{ c.name }}</a>{% endfor %}
+    <a href="/topics/">All topics</a>
+  </section>
+  <h2 class="section-title">More from the last few weeks</h2>
+  <div class="stream grid-2">
+  {%- for p in l.posts | skip(4) %}{% set size = 'secondary' if p.image else 'row' %}{% include "card.njk" %}{% endfor %}
+  </div>
+{%- else %}
+  <header class="page-head"><h1>Latest, page {{ l.page }}</h1></header>
+  <div class="stream">
+  {%- for p in l.posts %}{% set size = 'row' %}{% include "card.njk" %}{% endfor %}
+  </div>
+{%- endif %}
+  {% include "pager.njk" %}
+</div>

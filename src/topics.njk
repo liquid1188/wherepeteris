@@ -1,0 +1,12 @@
+---
+layout: base.njk
+title: Topics
+permalink: /topics/
+description: Browse Where Peter Is by topic, from commentary and analysis to scripture reflections and the Which Pope Said This? series.
+---
+<div class="wrap">
+  <header class="page-head"><h1>Topics</h1><p class="lede">Every category on the site, largest first.</p></header>
+  <ul class="topic-list">
+  {%- for c in wpi.topCategories %}<li><a href="{{ c.url }}">{{ c.name }}</a><span>{{ c.posts.length }}</span></li>{% endfor %}
+  </ul>
+</div>

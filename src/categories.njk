@@ -1,0 +1,9 @@
+---
+pagination: { data: wpi.categoryPages, size: 1, alias: l }
+permalink: "{{ l.url }}"
+layout: base.njk
+eleventyComputed:
+  title: "{{ l.item.name }}{% if l.page > 1 %}, page {{ l.page }}{% endif %}"
+  description: "{{ l.item.name }} at Where Peter Is: {{ l.total }} articles."
+---
+{% include "listing.njk" %}

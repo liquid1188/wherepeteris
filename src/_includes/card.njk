@@ -1,0 +1,10 @@
+{#- One article in a list. `p` is the post, `size` is lead | secondary | row -#}
+<article class="card card-{{ size }}">
+  {%- if p.image and size != 'row' %}<a class="card-img" href="{{ p.url }}" tabindex="-1" aria-hidden="true"><img src="{{ p.image | img('large') }}" alt="" loading="lazy" decoding="async"></a>{% endif %}
+  <div class="card-body">
+    {%- if p.primaryCat %}<a class="kicker" href="{{ p.primaryCat.url }}">{{ p.primaryCat.name }}</a>{% endif %}
+    <h{{ 2 if size == 'lead' else 3 }} class="card-title"><a href="{{ p.url }}">{{ p.title }}</a></h{{ 2 if size == 'lead' else 3 }}>
+    {%- if size != 'row' and p.summary %}<p class="card-summary">{{ p.summary }}</p>{% endif %}
+    <p class="byline"><a href="{{ p.authorObj.url }}">{{ p.authorObj.name }}</a><time datetime="{{ p.date }}">{{ p.dateObj | date('short') }}</time>{% if p.commentCount %}<a class="cc" href="{{ p.url }}#comments">{{ p.commentCount }} comment{% if p.commentCount != 1 %}s{% endif %}</a>{% endif %}</p>
+  </div>
+</article>
