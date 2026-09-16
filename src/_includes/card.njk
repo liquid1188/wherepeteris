@@ -1,6 +1,6 @@
 {#- One article in a list. `p` is the post, `size` is lead | secondary | row -#}
 <article class="card card-{{ size }}">
-  {%- if p.image and size != 'row' %}<a class="card-img" href="{{ p.url }}" tabindex="-1" aria-hidden="true"><img src="{{ p.image | img('large') }}" alt="" loading="lazy" decoding="async"></a>{% endif %}
+  {%- if p.image and size != 'row' %}<a class="card-img" href="{{ p.url }}" tabindex="-1" aria-hidden="true"><img src="{{ p.image | img('medium' if size == 'list' else 'large') }}" alt="" loading="lazy" decoding="async"></a>{% endif %}
   <div class="card-body">
     {%- if p.primaryCat %}<a class="kicker" href="{{ p.primaryCat.url }}">{{ p.primaryCat.name }}</a>{% endif %}
     <h{{ 2 if size == 'lead' else 3 }} class="card-title"><a href="{{ p.url }}">{{ p.title }}</a></h{{ 2 if size == 'lead' else 3 }}>

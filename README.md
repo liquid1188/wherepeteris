@@ -36,7 +36,7 @@ Comments post straight to WordPress's own `wp-comments-post.php`, so Akismet, mo
 
 ## Known gaps
 
-- The REST API does not expose Molongui guest authors, so articles by guest authors show the WordPress account that posted them. Fix on the WordPress side by giving guest authors real user accounts, or by exposing the Molongui field to the REST API.
+- The "WPI Contributor" account is the unsigned byline used for the Which Pope Said This series (400 posts); it is left out of the contributor spotlight on the home page.
 - GiveWP donation pages and the donor dashboard stay on WordPress; `/donate/` redirects there.
 - SearchWP, WP Rocket, Sucuri, SocialSnap, and MailOptin are no longer needed for the public site once it is static.
 

@@ -21,8 +21,8 @@
       <p class="crumb">Tagged</p><h1>{{ l.item.name }}</h1><p class="meta">{{ l.total }} article{% if l.total != 1 %}s{% endif %}</p>
     {%- endif %}
   </header>
-  <div class="stream">
-  {%- for p in l.posts %}{% set size = 'secondary' if (loop.first and l.page == 1 and p.image) else 'row' %}{% include "card.njk" %}{% endfor %}
+  <div class="stream stream-list">
+  {%- for p in l.posts %}{% set size = 'list' %}{% include "card.njk" %}{% endfor %}
   </div>
   {% include "pager.njk" %}
 </div>

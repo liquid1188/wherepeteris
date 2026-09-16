@@ -32,8 +32,8 @@ eleventyComputed:
   </section>
 {%- else %}
   <header class="page-head"><h1>Latest, page {{ l.page }}</h1></header>
-  <div class="stream">
-  {%- for p in l.posts %}{% set size = 'row' %}{% include "card.njk" %}{% endfor %}
+  <div class="stream stream-list">
+  {%- for p in l.posts %}{% set size = 'list' %}{% include "card.njk" %}{% endfor %}
   </div>
 {%- endif %}
   {% include "pager.njk" %}
@@ -53,7 +53,7 @@ eleventyComputed:
       </div>
       <div>
         <h3>Most frequent contributors</h3>
-        <ul class="people people-compact">{% for a in wpi.contributors | head(12) %}<li><a href="{{ a.url }}">{% if a.avatar %}<img src="{{ a.avatar }}" alt="" width="44" height="44" loading="lazy">{% endif %}<span><b>{{ a.name }}</b><br><small>{{ a.count }} articles</small></span></a></li>{% endfor %}</ul>
+        <ul class="people people-compact">{% for a in wpi.people | head(12) %}<li><a href="{{ a.url }}">{% if a.avatar %}<img src="{{ a.avatar }}" alt="" width="44" height="44" loading="lazy">{% endif %}<span><b>{{ a.name }}</b><br><small>{{ a.count }} articles</small></span></a></li>{% endfor %}</ul>
       </div>
       {%- if site.partners.length %}<div><h3>Partners and sponsors</h3><ul class="partners">{% for s in site.partners %}<li><a href="{{ s.url }}">{% if s.logo %}<img src="{{ s.logo }}" alt="{{ s.name }}">{% else %}{{ s.name }}{% endif %}</a></li>{% endfor %}</ul></div>{% endif %}
     </div>

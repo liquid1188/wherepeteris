@@ -63,8 +63,10 @@ function decorate(p) {
   p.dateObj = new Date(p.date);
   p.comments = commentsByPost[p.id] || [];
   p.commentCount = countThread(p.comments);
-  p.searchText = (p.title + " " + p.tagObjs.map(t => t.name).join(" ") + " " + p.cats.map(c => c.name).join(" ")).toLowerCase();
+  p.titleText = p.title.toLowerCase();
+  p.taxText = (p.tagObjs.map(t => t.name).join(" | ") + " | " + p.cats.map(c => c.name).join(" | ")).toLowerCase();
   p.bodyText = strip(p.content).toLowerCase();
+  p.wordCount = p.bodyText.split(" ").length;
   return p;
 }
 
@@ -94,27 +96,37 @@ for (const t of tags) { t.posts = posts.filter(p => p.tags.includes(t.id)); if (
 
 const topCategories = categories.filter(c => c.posts.length >= 3 && c.slug !== "uncategorized").sort((a, b) => b.posts.length - a.posts.length);
 const contributors = authors.filter(a => a.count > 0).sort((a, b) => b.count - a.count);
+const people = contributors.filter(a => a.slug !== "wpi-contributor");
 
 // Curated collections. An article is in a collection when a match phrase appears in its
 // title, tags, or categories (strong), or at least three times in the body (weak).
 function score(p, def) {
-  let sc = 0;
-  if (def.cat && p.cats.some(c => c.slug === def.cat)) sc += 10;
+  // Title match dominates, then tags/categories, then body density. Returns 0 when not a member.
+  let title = 0, tax = 0, body = 0;
+  if (def.cat && p.cats.some(c => c.slug === def.cat)) tax += 3;
   for (const m of def.match || []) {
-    if (p.searchText.includes(m)) sc += 5;
-    else { let n = 0, i = -1; while ((i = p.bodyText.indexOf(m, i + 1)) !== -1 && n < 6) n++; if (n >= 3) sc += Math.min(n, 6) / 2; }
+    if (p.titleText.includes(m)) title += 1;
+    if (p.taxText.includes(m)) tax += 1;
+    let n = 0, i = -1; while ((i = p.bodyText.indexOf(m, i + 1)) !== -1 && n < 12) n++;
+    body += n;
   }
-  return sc;
+  const density = body / Math.max(1, p.wordCount / 1000); // mentions per thousand words
+  if (!title && !tax && (body < 4 || density < 2)) return 0;
+  return title * 1000 + tax * 100 + Math.min(body, 12) * 5 + Math.min(density, 20);
+}
+function rank(defs) {
+  return posts.map(p => ({ p, sc: score(p, defs) })).filter(x => x.sc > 0).sort((a, b) => b.sc - a.sc || b.p.date.localeCompare(a.p.date)).map(x => x.p);
 }
 const collections = collectionDefs.map(def => {
-  const items = posts.map(p => ({ p, sc: score(p, def) })).filter(x => x.sc >= 3).sort((a, b) => b.sc - a.sc || b.p.date.localeCompare(a.p.date)).map(x => x.p);
-  return { ...def, url: `/collections/${def.slug}/`, posts: items, count: items.length, cover: items.find(p => p.image)?.image || null };
+  const items = rank(def);
+  const cover = items.find(p => p.image && p.image.width >= 600)?.image || null;
+  return { ...def, url: `/collections/${def.slug}/`, posts: items, count: items.length, cover };
 }).filter(c => c.count >= 3);
 const collectionPages = collections.flatMap(c => listing("collection", c, c.posts, c.url));
 for (const pope of popes) {
   const def = { match: pope.match };
   pope.url = `/popes/${pope.slug}/`;
-  pope.posts = posts.map(p => ({ p, sc: score(p, def) })).filter(x => x.sc >= 3).sort((a, b) => b.sc - a.sc || b.p.date.localeCompare(a.p.date)).map(x => x.p);
+  pope.posts = rank(def);
   pope.count = pope.posts.length;
 }
 const popePages = popes.flatMap(pope => listing("pope", pope, pope.posts, pope.url));
@@ -126,7 +138,7 @@ const years = {};
 for (const p of posts) (years[p.dateObj.getUTCFullYear()] ||= []).push(p);
 
 export default {
-  posts, pages, pagesById, collections, collectionPages, popes, popePages, popularPosts: popularPosts.length ? popularPosts : mostCommented.slice(0, 6), mostCommented, categories, tags, authors, contributors, topCategories,
+  posts, pages, pagesById, people, collections, collectionPages, popes, popePages, popularPosts: popularPosts.length ? popularPosts : mostCommented.slice(0, 6), mostCommented, categories, tags, authors, contributors, topCategories,
   homePages, authorPages, categoryPages, tagPages, years,
   totals: { posts: posts.length, comments: comments.length, authors: contributors.length },
   postsById: byId(posts),

@@ -1,9 +1,105 @@
 [
- { "slug": "john-xxiii", "name": "John XXIII", "years": "1958 to 1963", "line": "Called the Second Vatican Council", "match": ["john xxiii", "roncalli", "pacem in terris", "mater et magistra"] },
- { "slug": "paul-vi", "name": "Paul VI", "years": "1963 to 1978", "line": "Brought the Council to completion and implemented it", "match": ["paul vi", "montini", "humanae vitae", "evangelii nuntiandi", "populorum progressio", "novus ordo"] },
- { "slug": "john-paul-i", "name": "John Paul I", "years": "1978", "line": "The smiling pope, 33 days", "match": ["john paul i ", "john paul i,", "john paul i.", "luciani"] },
- { "slug": "john-paul-ii", "name": "John Paul II", "years": "1978 to 2005", "line": "Be not afraid", "match": ["john paul ii", "wojtyla", "wojtyła", "veritatis splendor", "evangelium vitae", "fides et ratio", "theology of the body", "ut unum sint"] },
- { "slug": "benedict-xvi", "name": "Benedict XVI", "years": "2005 to 2013", "line": "Theologian pope, first to resign in six centuries", "match": ["benedict xvi", "ratzinger", "deus caritas est", "summorum pontificum", "caritas in veritate", "spe salvi"] },
- { "slug": "francis", "name": "Francis", "years": "2013 to 2025", "line": "Mercy, synodality, and the peripheries", "match": ["pope francis", "bergoglio", "evangelii gaudium", "amoris laetitia", "laudato si", "fratelli tutti", "gaudete et exsultate", "querida amazonia", "traditionis custodes", "fiducia supplicans", "dilexit nos"] },
- { "slug": "leo-xiv", "name": "Leo XIV", "years": "2025 to present", "line": "First pope from the United States", "match": ["leo xiv", "prevost", "dilexi te", "pope leo"] }
+ {
+  "slug": "john-xxiii",
+  "name": "John XXIII",
+  "years": "1958 to 1963",
+  "line": "Called the Second Vatican Council",
+  "match": [
+   "john xxiii",
+   "roncalli",
+   "pacem in terris",
+   "mater et magistra",
+   "good pope john"
+  ]
+ },
+ {
+  "slug": "paul-vi",
+  "name": "Paul VI",
+  "years": "1963 to 1978",
+  "line": "Brought the Council to completion and implemented it",
+  "match": [
+   "paul vi",
+   "montini",
+   "humanae vitae",
+   "evangelii nuntiandi",
+   "populorum progressio",
+   "novus ordo"
+  ]
+ },
+ {
+  "slug": "john-paul-i",
+  "name": "John Paul I",
+  "years": "1978",
+  "line": "The smiling pope, 33 days",
+  "match": [
+   "john paul i ",
+   "john paul i,",
+   "john paul i.",
+   "john paul i:",
+   "luciani",
+   "albino luciani",
+   "smiling pope"
+  ]
+ },
+ {
+  "slug": "john-paul-ii",
+  "name": "John Paul II",
+  "years": "1978 to 2005",
+  "line": "Be not afraid",
+  "match": [
+   "john paul ii",
+   "wojtyla",
+   "wojtyła",
+   "veritatis splendor",
+   "evangelium vitae",
+   "fides et ratio",
+   "theology of the body",
+   "ut unum sint"
+  ]
+ },
+ {
+  "slug": "benedict-xvi",
+  "name": "Benedict XVI",
+  "years": "2005 to 2013",
+  "line": "Theologian pope, first to resign in six centuries",
+  "match": [
+   "benedict xvi",
+   "ratzinger",
+   "deus caritas est",
+   "summorum pontificum",
+   "caritas in veritate",
+   "spe salvi"
+  ]
+ },
+ {
+  "slug": "francis",
+  "name": "Francis",
+  "years": "2013 to 2025",
+  "line": "Mercy, synodality, and the peripheries",
+  "match": [
+   "pope francis",
+   "bergoglio",
+   "evangelii gaudium",
+   "amoris laetitia",
+   "laudato si",
+   "fratelli tutti",
+   "gaudete et exsultate",
+   "querida amazonia",
+   "traditionis custodes",
+   "fiducia supplicans",
+   "dilexit nos"
+  ]
+ },
+ {
+  "slug": "leo-xiv",
+  "name": "Leo XIV",
+  "years": "2025 to present",
+  "line": "First pope from the United States",
+  "match": [
+   "leo xiv",
+   "prevost",
+   "dilexi te",
+   "pope leo"
+  ]
+ }
 ]
